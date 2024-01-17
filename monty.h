@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdio_ext.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -54,4 +56,6 @@ extern arg_t *arguments;
 void validate_argum(int argc);
 void init_args();
 void malloc_failed(void);
+void get_stream_fail(char *fileName);
+void get_stream(char *fileName);
 #endif
