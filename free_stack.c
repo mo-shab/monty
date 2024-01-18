@@ -17,4 +17,3 @@ void free_stack(stack_t *head)
 		head = current;
 	}
 }
-

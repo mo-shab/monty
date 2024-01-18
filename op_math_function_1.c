@@ -1,19 +1,19 @@
 #include "monty.h"
 
 /**
- *f_sub- sustration
+ *_sub- sustration
  *@head: stack head
  *@counter: line_number
- *Return: no return
+ *Return: Nothing
  */
-void f_sub(stack_t **head, unsigned int counter)
+void _sub(stack_t **head, unsigned int counter)
 {
-	stack_t *aux;
+	stack_t *current;
 	int sus, nodes;
 
-	aux = *head;
-	for (nodes = 0; aux != NULL; nodes++)
-		aux = aux->next;
+	current = *head;
+	for (nodes = 0; current != NULL; nodes++)
+		current = current->next;
 	if (nodes < 2)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", counter);
@@ -22,24 +22,25 @@ void f_sub(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	aux = *head;
-	sus = aux->next->n - aux->n;
-	aux->next->n = sus;
-	*head = aux->next;
-	free(aux);
+	current = *head;
+	sus = current->next->n - current->n;
+	current->next->n = sus;
+	*head = current->next;
+	free(current);
 }
 
 
 /**
- * f_div - divides the top two elements of the stack.
- * @head: stack head
+ * _div - divides the top two elements of the stack.
+ * @head: head of the stack
  * @counter: line_number
- * Return: no return
+ * Return: Nothing
  */
-void f_div(stack_t **head, unsigned int counter)
+
+void _div(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, aux;
+	int len = 0, current;
 
 	h = *head;
 	while (h)
@@ -64,22 +65,22 @@ void f_div(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	aux = h->next->n / h->n;
-	h->next->n = aux;
+	current = h->next->n / h->n;
+	h->next->n = current;
 	*head = h->next;
 	free(h);
 }
 
 /**
- * f_mul - multiplies the top two elements of the stack.
- * @head: stack head
+ * _mul - multiplies the top two elements of the stack.
+ * @head: head of the stack
  * @counter: line_number
- * Return: no return
+ * Return: Nothing
  */
-void f_mul(stack_t **head, unsigned int counter)
+void _mul(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, aux;
+	int len = 0, current;
 
 	h = *head;
 	while (h)
@@ -96,23 +97,23 @@ void f_mul(stack_t **head, unsigned int counter)
 		exit(EXIT_FAILURE);
 	}
 	h = *head;
-	aux = h->next->n * h->n;
-	h->next->n = aux;
+	current = h->next->n * h->n;
+	h->next->n = current;
 	*head = h->next;
 	free(h);
 }
 
 /**
- * f_mod - computes the rest of the division of the second
+ * _mod - computes the rest of the division of the second
  * top element of the stack by the top element of the stack
- * @head: stack head
+ * @head: head of the stack
  * @counter: line_number
- * Return: no return
+ * Return: Nothing
  */
-void f_mod(stack_t **head, unsigned int counter)
+void _mod(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, aux;
+	int len = 0, current;
 
 	h = *head;
 	while (h)
@@ -137,9 +138,8 @@ void f_mod(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	aux = h->next->n % h->n;
-	h->next->n = aux;
+	current = h->next->n % h->n;
+	h->next->n = current;
 	*head = h->next;
 	free(h);
 }
-

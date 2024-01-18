@@ -8,6 +8,7 @@ bus_t bus = {NULL, NULL, NULL, 0};
  * @argv: monty file location
  * Return: 0 on success
  */
+
 int main(int argc, char *argv[])
 {
 	char *content;
@@ -43,7 +44,6 @@ int main(int argc, char *argv[])
 	}
 	free_stack(stack);
 	fclose(file);
+
 	return (0);
 }
-
-
