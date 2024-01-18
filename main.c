@@ -1,26 +1,23 @@
 #include "monty.h"
-#include <stdio.h>
-arg_t *arguments = NULL;
 
 /**
-* main - The main function
-* @argc: argument count
-* @argv: argument vector
-*
-* Return: Always succes
-*/
+ * main - The main function
+ * @argc: count of arguments
+ * @argv: vector of arguments
+ * Return: EXIT_SUCCESS on sucess
+ */
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	size_t n = 0;
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 
-	validate_argum(argc);
-	init_args();
-	get_stream(argv[1]);
+	glob.stack_n = 0;
+	glob.stack_mode = PUSH_STACK;
 
-	while (getline(&arguments->line, &n, arguments->stream) != -1)
-		printf("%s", arguments->line);
-
-	return (0);
+	readfile(argv[1]);
+	return (EXIT_SUCCESS);
 }
-

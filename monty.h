@@ -1,12 +1,17 @@
-#ifndef _MONTY_H
-#define _MONTY_H
-#define _GNU_SOURCE
+#ifndef MONTY_H
+#define MONTY_H
+
+#define PUSH_STACK 0
+#define PUSH_QUEUE 1
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio_ext.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -15,13 +20,13 @@
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -30,32 +35,49 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /**
- * struct arg_s - struct that hold variables
- * @stream: FIle that connect the file to stream
- * @line: string that get the line from the stream
+ * struct global - globals variables
+ * @stack_n: Value of the actual num to push
+ * @stack_mode: Mode to push
  *
- * Description: get the variables that will be used as opcode
+ * Description: Struct to store the globals variables
  */
-typedef struct arg_s
+typedef struct global
 {
-	FILE *stream;
-	char *line;
-} arg_t;
+	int stack_n;
+	int stack_mode;
+} global;
 
-extern arg_t *arguments;
+extern global glob;
 
-void validate_argum(int argc);
-void init_args();
-void malloc_failed(void);
-void get_stream_fail(char *fileName);
-void get_stream(char *fileName);
+void freestack(stack_t *stack);
+void readfile(char *file);
+void set_number(char *number);
+void (*check_command(char *command))(stack_t **, unsigned int);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void mod(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
+int valnumber(char *command, char *token, stack_t *stack, unsigned int line_n);
 #endif
